@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击头像冒爱心</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f8ff;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .avatar {
+            width: 200px;
+            height: 200px;
+            cursor: pointer;
+        }
+
+        .heart {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: floatUp 1s ease forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="avatar.png" alt="女生头像" class="avatar">
+    </div>
+
+    <script>
+        const container = document.querySelector('.container');
+        const avatar = document.querySelector('.avatar');
+
+        avatar.addEventListener('click', (e) => {
+            // 创建爱心元素
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = `${e.offsetX - 25}px`;
+            heart.style.top = `${e.offsetY - 25}px`;
+            heart.style.backgroundImage = "url('heart.png')";
+
+            container.appendChild(heart);
+
+            // 1秒后移除爱心
+            setTimeout(() => {
+                heart.remove();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
